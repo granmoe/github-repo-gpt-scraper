@@ -6,54 +6,37 @@ Welcome to the GitHub Repo GPT Scraper! This powerful tool is designed to help y
 
 ### Prerequisites
 
-- Node.js and npm or pnpm installed.
-
-### Installation
-
-1. **Clone the Repository**:
-
-   ```sh
-   git clone https://github.com/your-username/github-repo-gpt-scraper.git
-   ```
-
-2. **Navigate to the Project Directory**:
-
-   ```sh
-   cd github-repo-gpt-scraper
-   ```
-
-3. **Install Dependencies**:
-
-   ```sh
-   npm install
-   ```
-
-   Or, if you're using pnpm:
-
-   ```sh
-   pnpm install
-   ```
-
-4. **Build the Project**:
-   ```sh
-   npm run build
-   ```
+- Node.js installed.
 
 ### Usage
 
 - **Scrape a GitHub Repository**:
 
   ```sh
-  github-repo-gpt-scraper https://github.com/user/repo --out=repo.json
+  npx github-repo-gpt-scraper --url=https://github.com/user/repo --out=repo.json
   ```
 
   Replace `https://github.com/user/repo` with the URL of the repository you wish to scrape.
 
 - **Scrape the Current Working Directory**:
+
   ```sh
-  github-repo-gpt-scraper --out=repo.json
+  npx github-repo-gpt-scraper --out=repo.json
   ```
+
   This will scrape all the files in your current directory.
+
+- **Create a GPT Using the Scraped Data**:
+
+1. Visit [https://chat.openai.com/create](https://chat.openai.com/create) and click the "Configure" tab.
+2. Under "Knowledge," click "Upload files" and select the JSON file output by the scraper.
+3. Add the following basic instructions to the "Instructions" field:
+
+   ```md
+   You are the creator of the codebase documented in the attached file and an expert in all of its code and the dependencies it uses. All of the user's question will relate to this code, so reference it heavily. Give factual, detailed answers and help the user make updates to the code in as efficient a manner possible while explaining more complex points to them along the way.
+   ```
+
+The simple instructions above cover the essentials and seem to work pretty well, but feel free to experiment with your own!
 
 ### Output
 
@@ -70,9 +53,3 @@ This project is licensed under the MIT License.
 ---
 
 Happy Scraping and GPTs'ing! 🚀🤖
-
----
-
-## Basic Example GPT Instructions
-
-You are the creator of the codebase documented in the attached file and an expert in all of its code and the dependencies it uses. All of the user's question will relate to this code, so reference it heavily. Give factual, detailed answers and help the user make updates to the code in as efficient a manner possible while explaining more complex points to them along the way.
