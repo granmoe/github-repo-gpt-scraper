@@ -24,7 +24,7 @@ Welcome to the GitHub Repo GPT Scraper! This powerful tool is designed to help y
   npx github-repo-gpt-scraper --out=repo.json
   ```
 
-  This will scrape all the files in your current directory.
+  This will scrape all the files in your current directory, excluding gitignored files per the `.gitignore` file in `cwd`, and excluding common lockfiles and binary files.
 
 - **Create a GPT Using the Scraped Data**:
 
