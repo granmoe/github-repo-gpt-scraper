@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6", // Set the JavaScript version for output
+    "target": "ES2022", // Set the JavaScript version for output
     "module": "commonjs", // CommonJS modules for Node.js
     "outDir": "./dist", // Directory for output files
     "strict": true, // Enable all strict type-checking options

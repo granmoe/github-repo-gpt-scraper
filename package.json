@@ -1,11 +1,14 @@
 {
   "name": "github-repo-gpt-scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "github-repo-gpt-scraper": "dist/index.js"
+    "github-repo-gpt-scraper": "./dist/index.js"
   },
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "test": "ts-node index.ts",
     "build": "tsc"
