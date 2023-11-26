@@ -1,4 +1,4 @@
-# GitHub Repo GPT Scraper
+# 🤖 🔥 GitHub Repo GPT Scraper 🔥 🤖
 
 Welcome to the GitHub Repo GPT Scraper! This powerful tool is designed to help you effortlessly scrape GitHub repositories in order to create an [OpenAI GPT](https://chat.openai.com/create) based on your code! It works with either a public GitHub repository URL or a local directory (defaulting to the `cwd` if no URL is passed).
 
