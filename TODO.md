@@ -1,0 +1,2 @@
+- Default to scraping cwd if repo_url not passed
+- Add a cool README
