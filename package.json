@@ -1,0 +1,32 @@
+{
+  "name": "github-repo-gpt-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "github-repo-gpt-scraper": "dist/index.js"
+  },
+  "scripts": {
+    "test": "ts-node index.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/granmoe/github-repo-gpt-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/granmoe/github-repo-gpt-scraper/issues"
+  },
+  "homepage": "https://github.com/granmoe/github-repo-gpt-scraper#readme",
+  "dependencies": {
+    "@types/node": "^20.10.0",
+    "@types/yargs": "^17.0.32",
+    "axios": "^1.6.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2",
+    "yargs": "^17.7.2"
+  }
+}
