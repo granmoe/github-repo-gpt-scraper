@@ -8,6 +8,13 @@ import ignore from 'ignore'
 
 const isBinaryFile = (fileName: string): boolean => {
   const binaryExtensions = [
+    // Common font extensions:
+    '.woff',
+    '.woff2',
+    '.eot',
+    '.ttf',
+    '.otf',
+    // Common image extensions:
     '.png',
     '.jpg',
     '.jpeg',

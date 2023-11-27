@@ -1,2 +1,3 @@
-- Find the limits of file size for GPTs
-- Support huge repos: streaming, concurrent file ops
+- Respect nested .gitignore files (see if `ignore` package supports this)
+- Get it to work better on medium to large repos
+- Support scraping huge repos: streaming, concurrent file ops
