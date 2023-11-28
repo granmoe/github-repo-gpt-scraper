@@ -26,6 +26,23 @@ Welcome to the GitHub Repo GPT Scraper! This powerful tool is designed to help y
 
   This will scrape all the files in your current directory, excluding gitignored files per the `.gitignore` file in `cwd`, and excluding common lockfiles and binary files.
 
+- **Filter Files with Include and Exclude Options**:
+
+Use the --include option to specify a glob pattern for files you want to include.
+Use the --exclude option to specify a glob pattern for files you want to exclude.
+
+Example:
+
+```sh
+npx github-repo-gpt-scraper --include="src/**/*.ts" --out=repo.json
+```
+
+Or:
+
+```sh
+npx github-repo-gpt-scraper --exclude="tests/**" --out=repo.json
+```
+
 - **Create a GPT Using the Scraped Data**:
 
 1. Visit [https://chat.openai.com/create](https://chat.openai.com/create) and click the "Configure" tab.

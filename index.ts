@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import axios from 'axios'
 import yargs from 'yargs'
+import { minimatch } from 'minimatch'
 import ignore from 'ignore'
 
 const isBinaryFile = (fileName: string): boolean => {
@@ -61,6 +62,9 @@ const isGitIgnored = (filePath: string): boolean => {
   return ig.ignores(relativePath)
 }
 
+let includePattern = ''
+let excludePattern = ''
+
 const fetchRepoContents = async (
   owner: string,
   repo: string,
@@ -77,11 +81,19 @@ const fetchRepoContents = async (
 
   let files: FileInfo[] = []
   for (const item of data) {
-    if (
-      item.type === 'file' &&
-      !isBinaryFile(item.name) &&
-      !isLockfile(item.name)
-    ) {
+    if (item.type === 'file') {
+      if (isBinaryFile(item.name) || isLockfile(item.name)) {
+        continue
+      }
+
+      if (excludePattern && minimatch(item.path, excludePattern)) {
+        continue
+      }
+
+      if (includePattern && !minimatch(item.path, includePattern)) {
+        continue
+      }
+
       try {
         const fileContentResponse = await axios.get(item.download_url)
         const fileContent = fileContentResponse.data
@@ -134,35 +146,44 @@ const readFilesInDir = (dir: string, baseDir = dir): FileInfo[] => {
   let results: FileInfo[] = []
   const list = fs.readdirSync(dir)
 
-  list.forEach((file) => {
+  for (const file of list) {
     const filePath = path.resolve(dir, file)
     const stat = fs.statSync(filePath)
 
     if (isGitIgnored(filePath)) {
-      return
+      continue
     }
 
     if (['.git', 'node_modules'].includes(file)) {
-      return
+      continue
     }
 
     if (isBinaryFile(file) || isLockfile(file)) {
-      return
+      continue
     }
 
     if (stat && stat.isDirectory()) {
       // Recurse into a subdirectory
       results = results.concat(readFilesInDir(filePath, baseDir))
     } else {
+      const fileRelativePath = path.relative(baseDir, filePath)
+
+      if (excludePattern && minimatch(fileRelativePath, excludePattern)) {
+        continue
+      }
+
+      if (includePattern && !minimatch(fileRelativePath, includePattern)) {
+        continue
+      }
+
       const fileContent = fs.readFileSync(filePath, 'utf8')
 
       results.push({
-        path: path.relative(baseDir, filePath),
-        url: `file://${filePath}`,
+        path: fileRelativePath,
         content: fileContent,
       })
     }
-  })
+  }
 
   return results
 }
@@ -188,10 +209,27 @@ yargs(process.argv.slice(2))
           type: 'string',
           demandOption: true,
         })
+        .option('exclude', {
+          alias: 'e',
+          describe: 'Files matching this glob pattern will be excluded',
+          type: 'string',
+        })
+        .option('include', {
+          alias: 'i',
+          describe: 'Files must match this glob pattern to be included',
+          type: 'string',
+        })
     },
     async (argv) => {
       const url = argv.url
       const outputPath = argv.out
+      includePattern = argv.include ?? ''
+      excludePattern = argv.exclude ?? ''
+
+      console.log({
+        includePattern,
+        excludePattern,
+      })
 
       let files
       if (url) {
@@ -213,6 +251,6 @@ yargs(process.argv.slice(2))
 
 type FileInfo = {
   path: string
-  url: string
+  url?: string
   content: string | null
 }

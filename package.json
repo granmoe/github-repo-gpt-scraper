@@ -1,6 +1,6 @@
 {
   "name": "github-repo-gpt-scraper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./dist/index.js",
   "bin": {
@@ -29,6 +29,7 @@
     "@types/yargs": "^17.0.32",
     "axios": "^1.6.2",
     "ignore": "^5.3.0",
+    "minimatch": "^9.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2",
     "yargs": "^17.7.2"
