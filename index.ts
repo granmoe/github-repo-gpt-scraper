@@ -25,6 +25,24 @@ const isBinaryFile = (fileName: string): boolean => {
     '.zip',
     '.exe',
     '.dll',
+    '.ico',
+    '.svg',
+    '.icon',
+    '.webp',
+    // Common video extensions:
+    '.mp4',
+    '.webm',
+    '.mpeg',
+    '.mpg',
+    '.mov',
+    // Common audio extensions:
+    '.mp3',
+    '.wav',
+    '.aac',
+    '.ogg',
+    '.flac',
+    '.aiff',
+    '.midi',
   ]
 
   return binaryExtensions.some((extension) => fileName.endsWith(extension))
